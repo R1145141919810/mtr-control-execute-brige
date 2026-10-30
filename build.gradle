@@ -1,0 +1,45 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = "${mod_version}+1.20.1"
+group = 'org.mtbridge'
+base { archivesName = 'mtbridge' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+        }
+    }
+}
+
+repositories {
+    flatDir { dirs 'libs' }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Compile-only dependency on the host mod (Minecraft Transit Railway).
+    // It is never bundled, shaded or redistributed - put a compile-time extract
+    // of the host jar at libs/mtr-compile.jar (see libs/README.md).
+    compileOnly files('libs/mtr-compile.jar')
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title'   : 'mtbridge',
+            'Specification-Vendor'  : 'mtbridge',
+            'Implementation-Title'  : 'MTR Control Execute Bridge',
+            'Implementation-Version': project.version
+        ])
+    }
+}

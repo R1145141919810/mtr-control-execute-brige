@@ -1,0 +1,38 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL=""
+
+[[mods]]
+modId="mtbridge"
+version="${file.jarVersion}"
+displayName="MTR Dispatch Bridge"
+description='''
+Execution end of an external dynamic dispatch service.
+
+Receives JSON instructions over HTTP, applies them on the server thread, and exposes the same
+operations to other mods through a Java API. When the bridge is not running, the railway keeps
+running exactly as the simulator intends - nothing here changes behaviour unless instructed.
+'''
+authors="dispatch bridge"
+
+[[dependencies.mtbridge]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="SERVER"
+
+[[dependencies.mtbridge]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="SERVER"
+
+[[dependencies.mtbridge]]
+    modId="mtr"
+    mandatory=true
+    versionRange="[4.0.0,)"
+    ordering="AFTER"
+    side="SERVER"
